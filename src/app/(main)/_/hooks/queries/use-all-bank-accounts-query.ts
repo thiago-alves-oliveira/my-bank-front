@@ -1,34 +1,21 @@
+import { api } from "@/lib/api"
 import { useQuery } from "@tanstack/react-query"
 
-// interface IAllBankAccountsAPIProxyResponse {
-// 	result: {
-// 		id: string
-// 		bankName?: string
-// 	}[]
-// 	errors: string[]
-// 	isValid: boolean
-// }
+interface IAllBankAccountsAPIProxyResponse {
+	result: {
+		id: string
+		bankName?: string
+	}[]
+	errors: string[]
+	isValid: boolean
+}
 
 async function getAllBankAccountsFn() {
-	// Uncomment when api is ready
-	// const { data } = await api.get<IAllBankAccountsAPIProxyResponse>("IOBBank", {
-	// 	params,
-	// })
+	const { data } = await api.get<IAllBankAccountsAPIProxyResponse>("IOBBank", {
+		
+	})
 
-	// return data
-
-	return {
-		result: [
-			{
-				id: "1",
-				bankName: "Banco 1",
-			},
-			{
-				id: "2",
-				bankName: "Banco 2",
-			},
-		],
-	}
+	return data	
 }
 
 export function useAllBankAccountsQuery() {

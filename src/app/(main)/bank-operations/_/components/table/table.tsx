@@ -64,7 +64,7 @@ export function BankOperationsTable() {
 							data?.result.map(bankAccount => (
 								<TableRow key={bankAccount.id} className="bg-gray-50">
 									<TableCell className="py-3 px-4">
-										{bankAccount.bankName ?? "-"}
+										{bankAccount.name ?? "-"}
 									</TableCell>
 									<TableCell className="py-3 px-4">
 										{bankAccount.account ?? "-"}
@@ -73,7 +73,7 @@ export function BankOperationsTable() {
 										{bankAccount.branch ?? "-"}
 									</TableCell>
 									<TableCell className="py-3 px-4">
-										{maskCurrency(bankAccount.value)}
+										{maskCurrency(bankAccount.balance)}
 									</TableCell>
 									<TableCell className="py-3 px-4">
 										{getOperationType(bankAccount.operationType)}
