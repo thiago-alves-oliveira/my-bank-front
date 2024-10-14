@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 
-import type { ILink } from "../../hooks/use-links"
+import type { ILink } from "../../hooks/utils/use-links"
 
 interface ILinkWithSubLinksProps {
 	link: ILink

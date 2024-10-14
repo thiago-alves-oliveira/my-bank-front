@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller, useForm } from "react-hook-form"
 
+import { useAllBankAccountsQuery } from "@/app/(main)/_/hooks/queries/use-all-bank-accounts-query"
 import { AdvancedSelectInput } from "@/components/form/advanced-select-input/advanced-select-input"
 import { CurrencyInput } from "@/components/form/currency-input"
 import { useCreditOperationMutation } from "../hooks/use-credit-mutation"
@@ -22,6 +23,13 @@ export function CreditOperationForm({
 	onCancel,
 	fromModal = true,
 }: ICreditOperationFormProps) {
+	const { data: bankAccounts } = useAllBankAccountsQuery()
+	const bankAccountsOptions =
+		bankAccounts?.result.map(bankAccount => ({
+			value: bankAccount.id,
+			label: bankAccount.bankName,
+		})) ?? []
+
 	const { mutate, isPending } = useCreditOperationMutation()
 
 	const {
@@ -52,14 +60,19 @@ export function CreditOperationForm({
 					</h2>
 
 					<div className="w-full grid gap-x-4 gap-y-6 grid-cols-1 md:grid-cols-2">
-						{/* TODO: Implement all bank accounts query and filter */}
 						<Controller
 							name="bankAccountId"
 							control={control}
 							render={({ field: { name, value, onChange, onBlur } }) => (
 								<AdvancedSelectInput
 									name={name}
-									options={[]}
+									value={
+										bankAccountsOptions.find(
+											option => option.value === value,
+										) ?? null
+									}
+									onChange={option => onChange(option?.value)}
+									options={bankAccountsOptions}
 									onBlur={onBlur}
 									label="Conta Bancária"
 									error={errors.bankAccountId}

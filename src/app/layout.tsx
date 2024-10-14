@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
+import NextTopLoader from "nextjs-toploader"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
 import { cn } from "@/lib/utils"
@@ -27,10 +28,12 @@ export default function RootLayout({
 		<html lang="pt" suppressHydrationWarning>
 			<body
 				className={cn(
-					"min-h-screen bg-background font-sans antialiased",
+					"min-h-screen bg-gray-50 font-sans antialiased",
 					rubikSans.variable,
 				)}
 			>
+				<NextTopLoader color="#38a169" showSpinner />
+
 				<Providers>
 					{children}
 					{modal}
