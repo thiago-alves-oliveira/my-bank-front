@@ -4,7 +4,7 @@ import { Accordion } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-import { useLinks } from "../../hooks/use-links"
+import { useLinks } from "../../hooks/utils/use-links"
 import { DefaultLink } from "./default-link"
 import { LinkWithSubLinks } from "./link-with-sub-links"
 
@@ -19,7 +19,7 @@ export function Sidebar({ isCollapsed, toggleSidebar }: ISidebarProps) {
 	return (
 		<aside
 			className={cn(
-				"py-8 pl-4 pr-8 w-64 h-screen bg-gray-50 dark:bg-background fixed overflow-y-auto transition-all",
+				"py-8 pl-4 pr-8 w-64 h-screen dark:bg-background fixed overflow-y-auto transition-all",
 				{
 					"w-24 pr-4": isCollapsed,
 				},

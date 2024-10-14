@@ -1,3 +1,4 @@
+import { useAllBankAccountsQuery } from "@/app/(main)/_/hooks/queries/use-all-bank-accounts-query"
 import { AdvancedSelectInput } from "@/components/form/advanced-select-input/advanced-select-input"
 import { Button } from "@/components/ui/button"
 import {
@@ -13,7 +14,15 @@ import { OPERATION_TYPE_OPTIONS } from "../utils/constants"
 export function BankOperationsButtonFilter() {
 	const { filter } = useBankOperationsContext()
 
+	const { data } = useAllBankAccountsQuery()
+	const bankAccountsOptions =
+		data?.result.map(bankAccount => ({
+			value: bankAccount.id,
+			label: bankAccount.bankName,
+		})) ?? []
+
 	const searchParams = useSearchParams()
+	const bankAccountId = searchParams.get("bank_account_id")
 	const operationType = searchParams.get("operation_type")
 
 	return (
@@ -29,10 +38,17 @@ export function BankOperationsButtonFilter() {
 				<h4 className="font-semibold leading-none">Filtros</h4>
 
 				<div className="mt-4 space-y-4">
-					{/* TODO: Implement all bank accounts query and filter */}
 					<AdvancedSelectInput
 						name="bankAccountId"
-						options={[]}
+						value={
+							bankAccountId
+								? bankAccountsOptions?.find(
+										option => option.value === bankAccountId,
+									)
+								: null
+						}
+						options={bankAccountsOptions}
+						onChange={option => filter("bank_account_id", option?.value)}
 						label="Conta Bancária"
 						isMulti={false}
 						isClearable

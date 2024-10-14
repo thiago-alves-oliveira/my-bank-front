@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 import Link from "next/link"
-import type { ILink } from "../../hooks/use-links"
+import type { ILink } from "../../hooks/utils/use-links"
 
 interface IDefaultLinkProps {
 	link: ILink

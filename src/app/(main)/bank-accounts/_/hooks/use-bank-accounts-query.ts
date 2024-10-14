@@ -14,15 +14,11 @@ interface IBankAccountsAPIProxyResponse {
 	}[]
 }
 
-async function getBankAccountsFn(params: Record<string, string>) {
-	console.log("params", params)
-
+async function getBankAccountsFn(params: Record<string, string>) {	
 	const { data } = await api.get<IBankAccountsAPIProxyResponse>("IOBBank", {
-		// Uncomment when api is ready
-		// params,
+		params,
 	})
-
-	return data
+	return data	
 }
 
 export function useBankAccountsQuery(params: Record<string, string>) {

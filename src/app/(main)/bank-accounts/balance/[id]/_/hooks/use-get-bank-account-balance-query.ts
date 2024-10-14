@@ -11,23 +11,12 @@ interface IGetBankAccountBalanceAPIProxyResponse {
 }
 
 async function getBankAccountBalanceFn(id: string) {
-	await api.get<IGetBankAccountBalanceAPIProxyResponse>("IOBBank/balance", {
+	const { data } = await api.get<IGetBankAccountBalanceAPIProxyResponse>("IOBBank/balance", {
 		params: {
 			BankAccountId: id,
 		},
 	})
-
-	// Uncomment when the API is ready
-	// return data
-
-	return {
-		result: {
-			id: "00000000-0000-0000-0000-000000000000",
-			balance: 1490,
-		},
-		errors: [],
-		isValid: true,
-	}
+	return data	
 }
 
 export function useGetBankAccountBalanceQuery(id: string) {
